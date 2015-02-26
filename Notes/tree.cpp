@@ -25,6 +25,7 @@ void printCityNames(TreeNode *root){
     if(root->rightChild!=NULL)
         printCityNames(root->rightChild);
 }
+
 int main()
 {
     //building the city network from the lecture notes

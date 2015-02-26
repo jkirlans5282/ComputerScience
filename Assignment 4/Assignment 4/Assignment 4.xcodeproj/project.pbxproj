@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16AC53E01A9530CC0065DAE8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16AC53DF1A9530CC0065DAE8 /* main.cpp */; };
+		16AC53E81A9531390065DAE8 /* CommunicationNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16AC53E61A9531390065DAE8 /* CommunicationNetwork.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +24,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1632C9F41A9E83B400EC4DD5 /* messageIn.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = messageIn.txt; sourceTree = "<group>"; };
 		16AC53DC1A9530CC0065DAE8 /* Assignment 4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment 4"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AC53DF1A9530CC0065DAE8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		16AC53E61A9531390065DAE8 /* CommunicationNetwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommunicationNetwork.cpp; sourceTree = "<group>"; };
+		16AC53E71A9531390065DAE8 /* CommunicationNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationNetwork.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			children = (
 				16AC53DE1A9530CC0065DAE8 /* Assignment 4 */,
 				16AC53DD1A9530CC0065DAE8 /* Products */,
+				1632C9F41A9E83B400EC4DD5 /* messageIn.txt */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				16AC53DF1A9530CC0065DAE8 /* main.cpp */,
+				16AC53E61A9531390065DAE8 /* CommunicationNetwork.cpp */,
+				16AC53E71A9531390065DAE8 /* CommunicationNetwork.h */,
 			);
 			path = "Assignment 4";
 			sourceTree = "<group>";
@@ -119,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16AC53E01A9530CC0065DAE8 /* main.cpp in Sources */,
+				16AC53E81A9531390065DAE8 /* CommunicationNetwork.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +240,7 @@
 				16AC53E51A9530CC0065DAE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
