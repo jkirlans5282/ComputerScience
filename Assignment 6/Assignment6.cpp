@@ -23,9 +23,11 @@ int main(int argc, char ** argv){
 		std::cout<<"6. Quit"<<std::endl;
 
 		std::cin.clear();
+		std::string select;
 		int selection;
-		std::cin >> selection;
-		std::cin.ignore(10000, '\n');
+		getline(cin, select);
+		selection = std::atoi(select.c_str());
+		
 		switch(selection){
 			case 1:{
 				MT->buildTree();
@@ -56,6 +58,10 @@ int main(int argc, char ** argv){
 			case 6:{
 				std::cout<<"bye"<<std::endl;
 				exit(0);
+				break;
+			}
+			default:{
+				std::cout<<"Not a valid entry"<<std::endl;
 				break;
 			}
 		};

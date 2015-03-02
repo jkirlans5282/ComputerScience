@@ -8,35 +8,6 @@ void MovieTree::printMovieInventory(){
 	printMovie(root); //helper function serves no real purpose.
 }
 
-void MovieTree::restoreTree(MovieNode *current){
-	if(current->left!=NULL){
-		restoreTree(current->left); //recursively calls the left and right nodes, and re-adds them to the
-	}								//main tree beginning from the deleted node. inefficient when the deleted node is near the top but
-
-	if(current->right!=NULL){		//super simple to implement
-		restoreTree(current->right);
-	}
-	
-	addMovieNode(current->ranking, current->title, current->year, current->quantity);
-	current=NULL;
-}
-
-void MovieTree::deleteNode(MovieNode *current){
-	if(current!=NULL){
-		MovieNode temp = *current;
-		if(current->parent->right==current){current->parent->right=NULL;} //deletes a specfic node, by removing that node
-		else{current->parent->left=NULL;}								  // then readding all nodes below it.
-		current->right = NULL;
-		current->left = NULL;
-		current=NULL;
-		delete current;
-		if(temp.right != NULL){restoreTree(temp.right);} //<-here
-		if(temp.left != NULL){restoreTree(temp.left);}
-	}else{
-		std::cout<<"Movie not found"<<std::endl;
-	}
-
-}
 MovieTree::MovieTree(){
 	root=NULL; // constructor for Movietree
 }
@@ -49,6 +20,7 @@ void MovieTree::printMovie(MovieNode *movie){
 		printMovie(movie->right);
 	}
 }
+
 void MovieTree::buildTree(){
 	std::ifstream inFile("Assignment5Movies.txt");
 	std::string input;
