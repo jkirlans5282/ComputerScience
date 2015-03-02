@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "MovieTree.h"
-#include <sstream>
+#include <sstream> 
 #include <cstdlib>
 
 int main(int argc, char ** argv){
@@ -9,7 +9,7 @@ int main(int argc, char ** argv){
 	//std::cout<<fileName<<std::endl;
 	//std::ifstream inFile(fileName);
 	//std ifstream inFile
-	
+
 	MovieTree *MT=new MovieTree;
 	std::string name;
 
