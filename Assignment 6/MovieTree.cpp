@@ -1,34 +1,35 @@
 #include <iostream>
 #include <fstream>
-#include "Assignment5.h"
+#include "MovieTree.h"
 #include <sstream>
 #include <cstdlib>
+
 void MovieTree::printMovieInventory(){
-	//std::cout<<root->title;
-	//exit(0);
-	//std::cout<<root->right->title;
-	printMovie(root);
+	printMovie(root); //helper function serves no real purpose.
 }
+
 void MovieTree::restoreTree(MovieNode *current){
 	if(current->left!=NULL){
-		restoreTree(current->left);
-	}
-	if(current->right!=NULL){
+		restoreTree(current->left); //recursively calls the left and right nodes, and re-adds them to the
+	}															//main tree beginning from the deleted node. inefficient when the deleted node is near the top but
+
+	if(current->right!=NULL){			//super simple to implement
 		restoreTree(current->right);
 	}
 	addMovieNode(current->ranking, current->title, current->year, current->quantity);
 	current=NULL;
 }
+
 void MovieTree::deleteNode(MovieNode *current){
 	if(current!=NULL){
 		MovieNode temp = *current;
-		if(current->parent->right==current){current->parent->right=NULL;}
-		else{current->parent->left=NULL;}
+		if(current->parent->right==current){current->parent->right=NULL;} //deletes a specfic node, by removing that node
+		else{current->parent->left=NULL;}								  // then readding all nodes below it.
 		current->right = NULL;
 		current->left = NULL;
 		current=NULL;
 		delete current;
-		if(temp.right != NULL){restoreTree(temp.right);}
+		if(temp.right != NULL){restoreTree(temp.right);} //<-here
 		if(temp.left != NULL){restoreTree(temp.left);}
 	}else{
 		std::cout<<"Movie not found"<<std::endl;
@@ -36,7 +37,7 @@ void MovieTree::deleteNode(MovieNode *current){
 
 }
 MovieTree::MovieTree(){
-	root=NULL;
+	root=NULL; // constructor for Movietree
 }
 void MovieTree::printMovie(MovieNode *movie){
 	if(movie->left!=NULL){
@@ -98,22 +99,31 @@ void MovieTree::addMovieNode(int ranking, std::string title, int year, int quant
 	}
 	else{
 		parentNode->right = newNode;
-		//std::cout<<"right"<<std::endl;
 	}
-	//std::cout<<parentNode->title<<std::endl;
 }
-MovieNode * MovieTree::searchMovieTree(std::string name, MovieNode * current){
-	if(!current->title.compare(name)){std::cout<<"found: "<<current->title<<std::endl;return current;}
-	if(current->right==NULL && current->left == NULL){
+
+MovieNode * MovieTree::searchMovieTree(std::string name, MovieNode * current)
+{
+	if(!current->title.compare(name)) //if current title == search string
+	{
+		std::cout<<"found: "<<current->title<<std::endl;
+		return current;
+	}
+
+	if(current->right==NULL && current->left == NULL) //if both right and left children are null movie has not been found
+	{
 		std::cout<<"Movie Not found";
 		return NULL;
 	}
-	else if(current->title.compare(name)>0)
+	
+	else if(current->title.compare(name)>0) //if the search string is ahead of title in the alphabet
 	{
 		current = current ->left;
 		return searchMovieTree(name, current);
 	}
-	else{
+
+	else
+	{
 		current = current ->right;
 		return searchMovieTree(name, current);
 	}
@@ -122,69 +132,8 @@ void MovieTree::rentMovie(std::string name){
 	MovieNode * temp = searchMovieTree(name, root);
 	if(temp==NULL||temp->quantity==0){std::cout<<"Movie cannot be rented."<<std::endl;}
 	else
-		{	
+		{
 			std::cout<<temp->title<<" has been rented"<<std::endl;
 			temp->quantity-=1;
 		}
-}
-
-int main(int argc, char ** argv){
-	//std::string fileName = argv[1];
-	//std::cout<<fileName<<std::endl;
-	//std::ifstream inFile(fileName);
-
-	//std ifstream inFile
-	
-	MovieTree *MT=new MovieTree;
-	std::string name;
-
-	while(true)
-	{
-		std::cout<<"1. Insert all Movies"<<std::endl;
-		std::cout<<"2. Find a movie"<<std::endl;
-		std::cout<<"3. Rent a Movie"<<std::endl;
-		std::cout<<"4. Print entire Inventory"<<std::endl;
-		std::cout<<"5. Delete Movie"<<std::endl;
-		std::cout<<"6. Quit"<<std::endl;
-
-		std::cin.clear();
-		int selection;
-		std::cin >> selection;
-		std::cin.ignore(10000, '\n');
-		switch(selection){
-			case 1:{
-				MT->buildTree();
-				break;
-			}
-			case 2:{
-				std::cout<<"Enter a movie title: ";
-				getline(cin, name);
-				MT->searchMovieTree(name, MT->root);
-				break;
-			}
-			case 3:{
-				std::cout<<"Enter a movie title: ";
-				getline(cin, name);
-				MT->rentMovie(name);
-				break;
-			}
-			case 4:{
-				MT->printMovieInventory();
-				break;
-			}
-			case 5:{
-				std::cout<<"Enter a movie title: ";
-				getline(cin, name);
-				MT->deleteNode((MT->searchMovieTree(name, MT->root)));
-				break;
-			}
-			case 6:{
-				std::cout<<"bye"<<std::endl;
-				exit(0);
-				break;
-			}
-		};
-
-		//EUIV-2e36-c9f3-29be-c0e8-a117
-	}
 }
