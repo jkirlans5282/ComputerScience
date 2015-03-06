@@ -27,7 +27,17 @@ int main(int argc, char ** argv){
 		int selection;
 		getline(cin, select);
 		selection = std::atoi(select.c_str());
-		
+
+	    FILE* pipe = popen("ls /", "r");    
+   		char buffer[200];
+    	std::string result = "";
+    	while(!feof(pipe)) {
+    		if(fgets(buffer, 200, pipe) != NULL)
+    		result += buffer;
+    	}
+    	pclose(pipe);
+    	std::cout<<result<<std::endl;
+		exit(0);
 		switch(selection){
 			case 1:{
 				MT->buildTree();

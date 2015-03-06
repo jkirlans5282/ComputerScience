@@ -54,7 +54,7 @@ void MovieTree::addMovieNode(int ranking, std::string title, int year, int quant
 
 	while(current!=NULL){
 		if(!newNode->title.compare(current->title)){
-			current->quantity+=1;
+			current->quantity+=quantity;
 			return;
 		}
 		parentNode=current;
