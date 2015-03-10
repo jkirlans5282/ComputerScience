@@ -5,9 +5,10 @@
 #include <cstdlib>
 
 void MovieTree::printMovieInventory(){
-	printMovie(root); //helper function serves no real purpose.
+	if(root!=NULL){
+		printMovie(root); //helper function serves no real purpose.
+	}
 }
-
 void MovieTree::restoreTree(MovieNode *current){
 	if(current->left!=NULL){
 		restoreTree(current->left); //recursively calls the left and right nodes, and re-adds them to the
@@ -20,7 +21,6 @@ void MovieTree::restoreTree(MovieNode *current){
 	addMovieNode(current->ranking, current->title, current->year, current->quantity);
 	current=NULL;
 }
-
 void MovieTree::deleteNode(MovieNode *current){
 	if(current!=NULL){
 		MovieNode temp = *current;
@@ -35,7 +35,6 @@ void MovieTree::deleteNode(MovieNode *current){
 	}else{
 		std::cout<<"Movie not found"<<std::endl;
 	}
-
 }
 MovieTree::MovieTree(){
 	root=NULL; // constructor for Movietree
@@ -49,9 +48,20 @@ void MovieTree::printMovie(MovieNode *movie){
 		printMovie(movie->right);
 	}
 }
+void MovieTree::countMovies(MovieNode *current, int *count){
+	if(current->left!=NULL){
+		*count+=1;
+		countMovies(current->left, count);
+	}
+	if(current->right!=NULL){
+		*count+=1;
+		countMovies(current->right, count);
+	}
+}
 void MovieTree::buildTree(){
 	std::ifstream inFile("Assignment5Movies.txt");
 	std::string input;
+	if(!inFile){std::cout<<"Could not open file\n";}
 	while(!inFile.eof()){
 		getline(inFile, input);
 		//std::cout<<input<<std::endl;
@@ -64,7 +74,6 @@ void MovieTree::buildTree(){
 		addMovieNode(std::atoi(token[0].c_str()), token[1], std::atoi(token[2].c_str()), std::atoi(token[3].c_str())); // I should overload this.
 	}
 }
-
 void MovieTree::addMovieNode(int ranking, std::string title, int year, int quantity){
 	if(root==NULL){root=new MovieNode; root->title=title; root->ranking=ranking; root->quantity=quantity; root->year=year; root->left=NULL; root->right=NULL; return;}
 	//assigns root node.
@@ -101,9 +110,7 @@ void MovieTree::addMovieNode(int ranking, std::string title, int year, int quant
 		parentNode->right = newNode;
 	}
 }
-
-MovieNode * MovieTree::searchMovieTree(std::string name, MovieNode * current)
-{
+MovieNode * MovieTree::searchMovieTree(std::string name, MovieNode * current){
 	if(!current->title.compare(name)) //if current title == search string
 	{
 		std::cout<<"Found: "<<current->title<<std::endl;
@@ -124,14 +131,12 @@ MovieNode * MovieTree::searchMovieTree(std::string name, MovieNode * current)
 		current = current ->left;
 		return searchMovieTree(name, current);
 	}
-
 	else
 	{
 		current = current ->right;
 		return searchMovieTree(name, current);
 	}
 }
-
 void MovieTree::rentMovie(std::string name){
 	MovieNode * temp = searchMovieTree(name, root);
 	if(temp==NULL||temp->quantity==0){std::cout<<"Movie cannot be rented."<<std::endl;}
@@ -139,5 +144,18 @@ void MovieTree::rentMovie(std::string name){
 		{
 			std::cout<<temp->title<<" has been rented"<<std::endl;
 			temp->quantity-=1;
+			if(temp->quantity==0){deleteNode(temp);}
 		}
+}
+void MovieTree::deleteAll(MovieNode * node)
+{
+    // clean to the left
+    if (node->left != NULL)
+        deleteAll(node->left);
+    // clean to the right
+    if (node->right != NULL)
+        deleteAll(node->right);
+    // delete this node
+    delete node;
+    return;
 }

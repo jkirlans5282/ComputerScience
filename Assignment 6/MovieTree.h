@@ -27,6 +27,8 @@ class MovieTree
         MovieNode *root;
         void restoreTree(MovieNode*);
         void deleteNode(MovieNode*);
+        void countMovies(MovieNode*, int* );
+        void deleteAll(MovieNode*);
 
     protected:
     private:
