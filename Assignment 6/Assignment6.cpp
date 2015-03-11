@@ -17,7 +17,7 @@ int main(int argc, char ** argv){
 	//std::ifstream inFile(fileName);
 	//std ifstream inFile
 	jsonFile.open("Assignment6Output.txt");
-	jsonFile<<"{\n"
+	jsonFile<<"{\n";
 	MovieTree *MT=new MovieTree;
 	std::string name;
 
