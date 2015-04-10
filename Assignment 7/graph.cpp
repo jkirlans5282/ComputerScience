@@ -38,6 +38,7 @@ void Graph::addVertex(string n){
 }
 void Graph::displayEdges(){
     //loop through all vertices and adjacent vertices
+    cout<<"Printing all verticies and adjacent verticies\n";
     for(int i = 0; i < vertices.size(); i++){
         cout<<vertices[i].name<<"-->";
         for(int j = 0; j < vertices[i].adj.size(); j++){
@@ -51,12 +52,27 @@ void Graph::buildGraph(string filename){
 	if(!inFile){cout<<"Could not open file\n";}
 	string currentCityName;
 	getline(inFile, currentCityName, ','); //burn the first city 
-	//LOOP 1 the city names
+	//LOOP 1 the city names each are a vertex
 	for(int a =0; a<15; a++){
 		getline(inFile, currentCityName, ',');
 		addVertex(currentCityName);
 		cout<<currentCityName<<endl;
 	}
+    string weight;
+    while(!inFile.eof()){
+        getline(inFile, currentCityName, ',');//this code is assuming that + a b c
+                                     //                           a      
+                                     //                           b       
+                                     //                           c      
+       
+        for(int a = 1; a<15; a++){
+            getline(inFile, weight, ',');
+            cout<<weight<<endl;
+            adjVertex av;
+            vertices[a].adj.push_back(av);
+        }
+    }
+
 }
 
 void Graph::BFTraversal(string startingCity){

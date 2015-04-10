@@ -1,0 +1,39 @@
+//Hash Tables
+//hash in way that gives unique memory address
+
+simple hash function
+
+int hashSum(string x, int s){ //x is title s is table size
+	int sum=0;
+	for(x=1 to x.length){
+		sum = sum+x[i]; //sum up ascii values
+	}
+	sum=sum%s; //modulo sum by table size
+	return sum;
+}
+
+Example "Shawshank redemption" tablesize = 50
+83+104+97+119+115+104+97+110+107+32 ... = 2015
+2015%50=15
+[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,"shawshank redemption",16,17...50]
+
+collision
+"Go Cat Go" = 754 
+"Go Dog Go" = 754
+2 strings hash to the same value
+
+O(1) is worst case runtime with no collisions
+
+m.title = "Shawshank redemption";
+hashTable[15]=m
+int i = hashSum("Shawshank redemption",15)
+movie x = hashTable[i];
+
+to prevent collisions SALT THE HASH 
+chaining stuff
+array contains pointers to head of linked list
+
+[0] -> null
+[1] -> null
+[2] -> "shawshank" ->"flubber"
+[3] -> null
