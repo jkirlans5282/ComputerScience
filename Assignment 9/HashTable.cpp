@@ -62,7 +62,7 @@ void HashTable::printInventory() //Done
 		cout<<"["<<i<<"]"<<" : ";
 		Movie currentMovie = hashTable[i];
 		while(currentMovie.next!=NULL){
-			cout<<currentMovie.next->title<<", "<<currentMovie.next->year<<" : ";
+			cout<<"("<<currentMovie.next->title<<", "<<currentMovie.next->year<<") -> ";
 			currentMovie=*(currentMovie.next);
 			if(empty){empty = false;}
 		}
